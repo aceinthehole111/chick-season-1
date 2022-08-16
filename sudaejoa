@@ -1,0 +1,29 @@
+import csv
+data=csv.reader(open('precipitation.csv',encoding='cp949'))
+next(data) #데이터불러오기
+result=[]   #빈리스트만들기
+
+
+for row in data :
+    if 'Jan' in row[0] : #2011년부터 2022년까지 1월만 선택해서
+
+      J=0 #1월 강수량을 누적해서 더할 변수 초기화하기
+    for i in range(12):
+     J+=float(row[2])
+result.append(J) #1월의 강수량 누적해서 저장하기
+print(result)
+
+
+C=0 #1월 강수량을 누적해서 더할 변수 초기화하기
+
+for row in data :
+    if row[0].split('-')[1]=='08' : #2011년부터 2022년까지 8월만 선택해서
+      for i in range(12):
+       C+=float(row[2])
+result.append(C) #8월의 강수량 누적해서 저장하기
+
+print(result)
+
+import matplotlib.pyplot as plt #그래프 시각화하기
+plt.plot(result,'g')
+plt.show()
